@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="cyberpunk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/dashboard.css">
+</head>
+<body>
+  <div style="text-align:center; margin:20px 0;">
+  <img
+    src="https://pbs.twimg.com/profile_images/2034565949198864384/Dq4T2szw_400x400.jpg"
+    alt="Profile"
+    style="
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      border: 3px solid #39ff14;
+      box-shadow: 0 0 20px #39ff14;
+      object-fit: cover;
+    "
+  />
+</div>
+
+  <!-- scanlines overlay -->
+  <div class="scanline-overlay"></div>
+
+  <!-- Admin navigation bar -->
+  <header class="cyber-header">
+    <div class="header-container">
+      <a href="/" class="brand-logo">
+        <span class="glitch" data-text="GAURVIT.SYS">GAURVIT.SYS</span>
+        <span class="pulse-glow-indicator" style="background-color: var(--color-neon-pink); box-shadow: var(--accent-glow);"></span>
+      </a>
+
+      <nav class="cyber-nav" style="display:block;">
+        <ul class="nav-list" style="align-items:center;">
+          <li style="font-family:var(--font-cyber); font-weight:700; color:var(--color-neon-cyan); letter-spacing:1.5px; font-size:0.95rem;">
+            [ADMIN CONSOLE MAINFRAME]
+          </li>
+        </ul>
+      </nav>
+
+      <div class="control-deck">
+        <a href="/" class="deck-btn" title="Back to public matrix">
+          <span>PORTAL_OUT</span>
+        </a>
+        <button class="deck-btn" id="btn-admin-logout" style="border-color:var(--color-neon-pink); color:var(--color-neon-pink);" title="Lock Dashboard and Exit">
+          <span>LOCK_SHELL</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Admin Main chamber -->
+  <main class="cyber-section" style="padding-top:8rem;">
+    
+    <div class="admin-header-row">
+      <h2 class="cyber-sec-title">TELEMETRIES & CONTROLS</h2>
+      <div style="font-family:var(--font-mono); font-size:0.75rem; color:var(--text-muted);">
+        OPERATIONAL STATE: <span style="color:var(--color-neon-pink);"><%= isOffline ? 'SANDBOX_SANDBOX' : 'MONGODB_LIVE' %></span>
+      </div>
+    </div>
+
+    <!-- 1. Stats telemetry grid -->
+    <section class="admin-grid-container">
+      
+      <!-- Total Projects -->
+      <div class="stat-widget-card">
+        <div class="stat-widget-title">PORTFOLIO PROJECTS</div>
+        <div class="stat-widget-value"><%= projects.length %></div>
+        <div class="stat-widget-subtitle">SECTIONS INDEXED</div>
+      </div>
+
+      <!-- Total Blogs -->
+      <div class="stat-widget-card">
+        <div class="stat-widget-title">LOGS ARTIFACTS</div>
+        <div class="stat-widget-value"><%= blogs.length %></div>
+        <div class="stat-widget-subtitle">MARKDOWN ENTRIES</div>
+      </div>
+
+      <!-- Total Contact Messages -->
+      <div class="stat-widget-card">
+        <div class="stat-widget-title">INCOMING PACKETS</div>
+        <div class="stat-widget-value" style="color: var(--color-neon-cyan); text-shadow: var(--cyan-glow);">
+          <%= contacts.length %>
+        </div>
+        <div class="stat-widget-subtitle">TOTAL INBOX INQUIRIES</div>
+      </div>
+
+      <!-- Unread messages count -->
+      <% const unreadCount = contacts.filter(c => !c.read).length; %>
+      <div class="stat-widget-card" style="border-color: <%= unreadCount > 0 ? 'var(--color-neon-pink)' : 'var(--glass-border)' %>">
+        <div class="stat-widget-title">UNREAD TELEMETRIES</div>
+        <div class="stat-widget-value" style="color: <%= unreadCount > 0 ? 'var(--color-neon-pink)' : 'var(--text-muted)' %>">
+          <%= unreadCount %>
+        </div>
+        <div class="stat-widget-subtitle">ACTION PENDING</div>
+      </div>
+
+    </section>
+
+    <!-- 2. Controls Panel Tabs switcher deck -->
+    <div class="admin-tab-deck">
+      <button class="admin-tab-btn active" data-pane="projects">MANAGE_PROJECTS</button>
+      <button class="admin-tab-btn" data-pane="blogs">MANAGE_BLOGS</button>
+      <button class="admin-tab-btn" data-pane="inbox">INBOX_MESSAGES (<%= unreadCount %>)</button>
+    </div>
+
+    <!-- 3. Pane Content fields -->
+    
+    <!-- PANE A: PROJECTS -->
+    <section class="admin-console-pane active" id="pane-projects">
+      <div class="admin-header-row" style="margin-bottom: 1.2rem;">
+        <h3 class="category-title" style="margin-bottom:0;">PROJECTS DIRECTORY</h3>
+        <button class="cyber-btn" id="btn-add-project" style="font-size:0.75rem; padding:0.5rem 1.2rem;">
+          <span>ADD_PROJECT</span>
+        </button>
+      </div>
+
+      <div class="table-chassis">
+        <table class="crud-grid-table">
+          <thead>
+            <tr>
+              <th>ORDER</th>
+              <th>PROJECT TITLE</th>
+              <th>TECH SPECS</th>
+              <th>FEATURED</th>
+              <th>RESOURCES</th>
+              <th>CONTROLS</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% if (projects && projects.length > 0) { %>
+              <% projects.forEach(p => { %>
+                <tr>
+                  <td style="font-family:var(--font-mono);"><%= p.order %></td>
+                  <td style="font-weight:700;"><%= p.title %></td>
+                  <td>
+                    <% p.tags.forEach(t => { %>
+                      <span class="table-tag"><%= t %></span>
+                    <% }) %>
+                  </td>
+                  <td>
+                    <span class="status-pill <%= p.featured ? 'read' : 'unread' %>">
+                      <%= p.featured ? 'FEATURED' : 'STANDARD' %>
+                    </span>
+                  </td>
+                  <td style="font-size:0.75rem; font-family:var(--font-mono);">
+                    <a href="<%= p.githubLink %>" target="_blank" style="color:var(--color-neon-cyan);">GitHub</a>
+                    <%= p.demoLink ? ' | ' : '' %>
+                    <% if (p.demoLink) { %>
+                      <a href="<%= p.demoLink %>" target="_blank" style="color:var(--color-neon-pink);">Demo</a>
+                    <% } %>
+                  </td>
+                  <td>
+                    <div class="action-cluster">
+                      <button class="action-icon-btn btn-edit-project" data-project="<%= JSON.stringify(p) %>">EDIT</button>
+                      <button class="action-icon-btn delete btn-delete-project" data-id="<%= p._id %>">PURGE</button>
+                    </div>
+                  </td>
+                </tr>
+              <% }) %>
+            <% } else { %>
+              <tr>
+                <td colspan="6" style="text-align:center;">Zero Projects documented. Add one above!</td>
+              </tr>
+            <% } %>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- PANE B: BLOGS -->
+    <section class="admin-console-pane" id="pane-blogs">
+      <div class="admin-header-row" style="margin-bottom: 1.2rem;">
+        <h3 class="category-title" style="margin-bottom:0;">BLOG ARTICLE LOGS</h3>
+        <button class="cyber-btn" id="btn-add-blog" style="font-size:0.75rem; padding:0.5rem 1.2rem;">
+          <span>ADD_BLOG</span>
+        </button>
+      </div>
+
+      <div class="table-chassis">
+        <table class="crud-grid-table">
+          <thead>
+            <tr>
+              <th>DATE METRIC</th>
+              <th>LOG HEADER</th>
+              <th>TAGS</th>
+              <th>COMMENTS</th>
+              <th>STATUS</th>
+              <th>CONTROLS</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% if (blogs && blogs.length > 0) { %>
+              <% blogs.forEach(b => { %>
+                <tr>
+                  <td style="font-family:var(--font-mono); font-size:0.75rem;"><%= new Date(b.createdAt).toLocaleDateString() %></td>
+                  <td style="font-weight:700;"><%= b.title %></td>
+                  <td>
+                    <% b.tags.forEach(t => { %>
+                      <span class="table-tag"><%= t %></span>
+                    <% }) %>
+                  </td>
+                  <td style="font-family:var(--font-mono); text-align:center;"><%= b.comments.length %></td>
+                  <td>
+                    <span class="status-pill <%= b.status === 'published' ? 'read' : 'unread' %>">
+                      <%= b.status.toUpperCase() %>
+                    </span>
+                  </td>
+                  <td>
+                    <div class="action-cluster">
+                      <button class="action-icon-btn btn-edit-blog" data-blog="<%= JSON.stringify(b) %>">EDIT</button>
+                      <button class="action-icon-btn delete btn-delete-blog" data-id="<%= b._id %>">PURGE</button>
+                    </div>
+                  </td>
+                </tr>
+              <% }) %>
+            <% } else { %>
+              <tr>
+                <td colspan="6" style="text-align:center;">Zero Blogs written. Write one above!</td>
+              </tr>
+            <% } %>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- PANE C: INBOX MESSAGES -->
+    <section class="admin-console-pane" id="pane-inbox">
+      <h3 class="category-title" style="margin-bottom:1.5rem;">CLIENT MESSAGES DIRECTORY</h3>
+
+      <div class="table-chassis">
+        <table class="crud-grid-table">
+          <thead>
+            <tr>
+              <th>INCOMING TICK</th>
+              <th>IDENTITY CALLSIGN</th>
+              <th>EMAIL PORTAL</th>
+              <th>SUBJECT CONTEXT</th>
+              <th>TELEMETRY STATUS</th>
+              <th>CONTROLS</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% if (contacts && contacts.length > 0) { %>
+              <% contacts.forEach(c => { %>
+                <tr id="message-row-<%= c._id %>">
+                  <td style="font-family:var(--font-mono); font-size:0.75rem;"><%= new Date(c.createdAt).toLocaleDateString() %></td>
+                  <td style="font-weight:700;"><%= c.name %></td>
+                  <td style="font-family:var(--font-mono);"><%= c.email %></td>
+                  <td><%= c.subject %></td>
+                  <td>
+                    <span class="status-pill <%= c.read ? 'read' : 'unread' %>">
+                      <%= c.read ? 'READ' : 'UNREAD' %>
+                    </span>
+                  </td>
+                  <td>
+                    <div class="action-cluster">
+                      <button class="action-icon-btn btn-view-msg" data-message="<%= JSON.stringify(c) %>">DECRYPT</button>
+                      <button class="action-icon-btn delete btn-delete-msg" data-id="<%= c._id %>">PURGE</button>
+                    </div>
+                  </td>
+                </tr>
+              <% }) %>
+            <% } else { %>
+              <tr>
+                <td colspan="6" style="text-align:center;">Inbox registers empty. Secure.</td>
+              </tr>
+            <% } %>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==========================================
+       MODAL 1: ADD/EDIT PROJECT
+       ========================================== -->
+  <div class="cyber-admin-modal" id="project-modal">
+    <div class="modal-content-chassis">
+      <div class="modal-head">
+        <h4 class="modal-title" id="modal-project-title">ADD PORTFOLIO PROJECT</h4>
+        <button class="modal-close-btn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form class="contact-form" id="project-crud-form">
+          <input type="hidden" id="field-project-id">
+          
+          <div class="form-field-unit">
+            <label for="p-title">PROJECT TITLE</label>
+            <input type="text" id="field-project-title" class="form-input" required placeholder="Windows 11 replica">
+          </div>
+          
+          <div class="form-field-unit">
+            <label for="p-tags">TECHNICAL KEYWORDS (comma separated)</label>
+            <input type="text" id="field-project-tags" class="form-input" required placeholder="HTML5, CSS3, JavaScript">
+          </div>
+
+          <div class="form-group-double">
+            <div class="form-field-unit">
+              <label for="p-github">GITHUB REPOSITORY LINK</label>
+              <input type="url" id="field-project-github" class="form-input" placeholder="https://github.com/...">
+            </div>
+            <div class="form-field-unit">
+              <label for="p-demo">LIVE RUNNING DEMO LINK</label>
+              <input type="url" id="field-project-demo" class="form-input" placeholder="https://win11.gaurvit.tech">
+            </div>
+          </div>
+
+          <div class="form-group-double">
+            <div class="form-field-unit">
+              <label for="p-image">IMAGE CAPTURE PATH</label>
+              <input type="text" id="field-project-image" class="form-input" value="/images/project-placeholder.webp" placeholder="/images/capture.png">
+            </div>
+            <div class="form-field-unit">
+              <label for="p-order">SORTING MATRIX ORDER</label>
+              <input type="number" id="field-project-order" class="form-input" value="0">
+            </div>
+          </div>
+
+          <div class="form-field-unit" style="flex-direction:row; align-items:center; gap:10px; margin:0.5rem 0;">
+            <input type="checkbox" id="field-project-featured" style="width:18px; height:18px; cursor:pointer;">
+            <label for="p-featured" style="cursor:pointer; margin-bottom:0;">PIN AS FEATURED SHOWCASE ON HERO SECTION</label>
+          </div>
+
+          <div class="form-field-unit">
+            <label for="p-desc">COMPREHENSIVE SPECS DESCRIPTION</label>
+            <textarea id="field-project-desc" class="form-input" required placeholder="Elaborated engineering, frameworks architectures, and visual models..." style="min-height:90px;"></textarea>
+          </div>
+
+          <button type="submit" class="cyber-btn" style="width:100%; margin-top:0.8rem;">
+            <span>PROCESS TRANSACTION</span>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       MODAL 2: ADD/EDIT BLOG RECORD
+       ========================================== -->
+  <div class="cyber-admin-modal" id="blog-modal">
+    <div class="modal-content-chassis">
+      <div class="modal-head">
+        <h4 class="modal-title" id="modal-blog-title">ADD BLOG POST RECORD</h4>
+        <button class="modal-close-btn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form class="contact-form" id="blog-crud-form">
+          <input type="hidden" id="field-blog-id">
+
+          <div class="form-field-unit">
+            <label for="b-title">ARTICLE TITLE</label>
+            <input type="text" id="field-blog-title" class="form-input" required placeholder="How to Secure Express APIs in Node.js">
+          </div>
+
+          <div class="form-group-double">
+            <div class="form-field-unit">
+              <label for="b-tags">KEYWORDS (comma separated)</label>
+              <input type="text" id="field-blog-tags" class="form-input" required placeholder="Node.js, Express, Security">
+            </div>
+            <div class="form-field-unit">
+              <label for="b-status">STATUS STATE</label>
+              <select id="field-blog-status" class="form-input" style="height:44px; padding:0.5rem 1rem;">
+                <option value="published">PUBLISHED</option>
+                <option value="draft">DRAFT</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-field-unit">
+            <label for="b-excerpt">SHORT SUMMARY STATEMENT</label>
+            <input type="text" id="field-blog-excerpt" class="form-input" required placeholder="Essential secure filters cataloging encryption algorithms, CORS rules, and rate limits.">
+          </div>
+
+          <div class="form-field-unit">
+            <label for="b-content">COMPILATION MARKDOWN PAYLOAD</label>
+            <textarea id="field-blog-content" class="form-input" required placeholder="## Tapping standard markdown... Compose rich guidelines here..." style="min-height:160px; font-family:var(--font-mono); font-size:0.8rem;"></textarea>
+          </div>
+
+          <button type="submit" class="cyber-btn" style="width:100%; margin-top:0.8rem;">
+            <span>COMPILE MARKDOWN</span>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       MODAL 3: VIEW MESSAGE DETAILS CONSOLE
+       ========================================== -->
+  <div class="cyber-admin-modal" id="message-modal">
+    <div class="modal-content-chassis" style="max-width:550px;">
+      <div class="modal-head">
+        <h4 class="modal-title" style="color:var(--color-neon-pink);">DECRYPTED MESSAGE</h4>
+        <button class="modal-close-btn">&times;</button>
+      </div>
+      <div class="modal-body" style="font-family:var(--font-mono); font-size:0.85rem; line-height:1.6; display:flex; flex-direction:column; gap:1.2rem; background-color:#07070b; color:#39ff14; text-shadow:0 0 4px rgba(57,255,20,0.3);">
+        
+        <div>
+          <div>IDENTITY CALLSIGN: <span id="msg-sender" style="color:#fff;">Saitama</span></div>
+          <div>INCOMING PORTAL: <span id="msg-email" style="color:#fff;">saitama@hero.org</span></div>
+          <div>CONTEXT HEADER: <span id="msg-subject" style="color:#fff;">Proposal</span></div>
+          <div>TIMESTAMP INDEX: <span id="msg-date" style="color:#fff;">2026/06/01</span></div>
+        </div>
+        
+        <div style="border-top:1px dashed rgba(57,255,20,0.3); padding-top:1rem;">
+          PAYLOAD PACKETS:
+          <p id="msg-body" style="color:#fff; text-shadow:none; margin-top:0.5rem; white-space:pre-wrap;"></p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer states -->
+  <%- include('partials/footer') %>
+
+  <!-- Dashboards assets -->
+  <script src="/js/main.js"></script>
+  <script src="/js/dashboard.js"></script>
+</body>
+</html>

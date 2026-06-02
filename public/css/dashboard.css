@@ -1,0 +1,246 @@
+/* ==========================================================================
+   ADMIN CONSOLE CENTRAL STYLESHEET
+   ========================================================================== */
+
+.admin-grid-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.stat-widget-card {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--panel-radius);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.stat-widget-title {
+  font-family: var(--font-cyber);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  letter-spacing: 1px;
+}
+
+.stat-widget-value {
+  font-family: var(--font-cyber);
+  font-size: 1.8rem;
+  font-weight: 900;
+  color: var(--color-neon-pink);
+  text-shadow: var(--accent-glow);
+}
+
+.stat-widget-subtitle {
+  font-size: 0.7rem;
+  color: var(--color-neon-cyan);
+}
+
+/* Control console partitions */
+.admin-tab-deck {
+  display: flex;
+  gap: 1rem;
+  border-bottom: 2px solid var(--bg-accent);
+  padding-bottom: 1rem;
+  margin-bottom: 2rem;
+}
+
+.admin-tab-btn {
+  font-family: var(--font-cyber);
+  font-weight: 700;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  padding: 0.5rem 1.2rem;
+  border-radius: 4px;
+  transition: all 0.3s;
+}
+
+.admin-tab-btn:hover, .admin-tab-btn.active {
+  background: var(--bg-accent);
+  color: var(--color-neon-cyan);
+  box-shadow: 0 0 10px rgba(0, 243, 255, 0.15);
+}
+
+.admin-console-pane {
+  display: none;
+}
+
+.admin-console-pane.active {
+  display: block;
+  animation: chat-entry 0.4s ease forwards;
+}
+
+/* CRUD operations tables */
+.table-chassis {
+  width: 100%;
+  overflow-x: auto;
+  border: 1px solid var(--glass-border);
+  border-radius: var(--panel-radius);
+  background: var(--glass-bg);
+}
+
+.crud-grid-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.85rem;
+}
+
+.crud-grid-table th {
+  background-color: var(--bg-accent);
+  font-family: var(--font-cyber);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--color-neon-cyan);
+  padding: 1rem 1.2rem;
+  border-bottom: 1.5px solid var(--glass-border);
+  letter-spacing: 1px;
+}
+
+.crud-grid-table td {
+  padding: 1rem 1.2rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  color: var(--text-main);
+  vertical-align: middle;
+}
+
+.crud-grid-table tr:hover td {
+  background-color: rgba(255, 255, 255, 0.02);
+}
+
+.table-tag {
+  background-color: var(--bg-accent);
+  border: 1px solid var(--glass-border);
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  margin-right: 4px;
+}
+
+/* Operational action tags */
+.action-cluster {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.action-icon-btn {
+  background-color: var(--bg-accent);
+  border: 1px solid var(--glass-border);
+  padding: 0.4rem 0.6rem;
+  border-radius: 4px;
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  transition: all 0.2s;
+}
+
+.action-icon-btn:hover {
+  border-color: var(--color-neon-cyan);
+  color: var(--color-neon-cyan);
+  transform: translateY(-2px);
+}
+
+.action-icon-btn.delete:hover {
+  border-color: var(--color-neon-pink);
+  color: var(--color-neon-pink);
+}
+
+/* Modals & popup forms */
+.cyber-admin-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(5px);
+  z-index: 2000;
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+
+.cyber-admin-modal.visible {
+  display: flex;
+}
+
+.modal-content-chassis {
+  background: var(--bg-secondary);
+  border: 1.5px solid var(--color-neon-cyan);
+  box-shadow: var(--cyan-glow);
+  width: 90%;
+  max-width: 650px;
+  max-height: 85vh;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  animation: chat-entry 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+.modal-head {
+  padding: 1.2rem 1.5rem;
+  background-color: var(--bg-accent);
+  border-bottom: 1.5px solid var(--glass-border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-title {
+  font-family: var(--font-cyber);
+  font-size: 1.1rem;
+  color: var(--color-neon-cyan);
+}
+
+.modal-close-btn {
+  font-size: 1.5rem;
+  color: var(--text-muted);
+  cursor: none;
+}
+
+.modal-close-btn:hover {
+  color: var(--color-neon-pink);
+}
+
+.modal-body {
+  padding: 1.8rem;
+  overflow-y: auto;
+}
+
+/* Messages Read / Unread markers */
+.status-pill {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 20px;
+  font-weight: 700;
+  display: inline-block;
+}
+
+.status-pill.unread {
+  background-color: rgba(255, 0, 127, 0.15);
+  border: 1px solid var(--color-neon-pink);
+  color: var(--color-neon-pink);
+}
+
+.status-pill.read {
+  background-color: rgba(57, 255, 20, 0.15);
+  border: 1px solid #39ff14;
+  color: #39ff14;
+}
+
+/* Flex buttons and layouts */
+.admin-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.admin-header-row .section-title {
+  margin-bottom: 0;
+}

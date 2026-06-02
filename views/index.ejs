@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="cyberpunk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Premium Anime + Cyberpunk Developer Portfolio for Gaurvit Tiwati featuring Node.js, Express, EJS, and MongoDB.">
+  <title><%= title %></title>
+  
+  <!-- System Stylesheet Links -->
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/terminal.css">
+</head>
+<body>
+  
+
+  <!-- 1. Anime glitched bootup loading screen -->
+  <%- include('partials/loading') %>
+
+  <!-- 2. Cyber HUD scanline mesh overlays -->
+  <div class="scanline-overlay"></div>
+
+  <!-- 3. Header controls deck -->
+  <%- include('partials/header') %>
+
+  <!-- 4. Interactive Yuki companion Floating character -->
+  <%- include('partials/companion') %>
+
+  <!-- 5. Floating Custom AI chatbot window -->
+  <%- include('partials/chatbot') %>
+
+  <!-- 6. Fullscreen Terminal emulation overlays -->
+  <%- include('partials/terminal') %>
+
+  <!-- ==========================================
+       SECTION 1: HOME HERO CHAMBER
+       ========================================== -->
+  <section class="cyber-section" id="home">
+    <div class="hero-grid">
+      
+      <!-- Left specs info -->
+      <div class="hero-info">
+        <div class="hero-subtitle">SYSTEM STATUS: FULL-STACK ACTIVE</div>
+        <h1 class="hero-title">
+          Hi, I am <br>
+          <span>Gaurvit Tiwati</span>
+        </h1>
+        
+        <!-- Typing script console simulation -->
+        <div class="typing-cursor-container">
+          <span class="prompt">> </span>
+          <span id="hero-typing-target"></span>
+          <span class="typing-cursor"></span>
+        </div>
+        
+        <p class="hero-description">
+          I am a specialized full-stack cyber-developer architecting secure Node.js microservices, 
+          managing transactional MongoDB collections, and designing custom interactive EJS frontends.
+        </p>
+
+        <!-- Live dev telemetries -->
+        <div class="hero-live-telemetry">
+          <div class="telemetry-node">
+            <div class="telemetry-node-val" id="tele-github">840+</div>
+            <div class="telemetry-node-lbl">GITHUB CONTRIBUTIONS</div>
+          </div>
+          <div class="telemetry-node">
+            <div class="telemetry-node-val" id="tele-leetcode">340+</div>
+            <div class="telemetry-node-lbl">LEETCODE PROBLEMS</div>
+          </div>
+          <div class="telemetry-node">
+            <div class="telemetry-node-val" id="tele-peerlist">VERIFIED</div>
+            <div class="telemetry-node-lbl">PEERLIST DEV GRID</div>
+          </div>
+        </div>
+
+        <div class="action-box">
+          <a href="#projects" class="cyber-btn">
+            <span>INSPECT WORK</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M5 13h11.86l-5.43 5.43 1.42 1.42L21.14 12l-8.29-8.29-1.42 1.42 5.43 5.43H5z"/>
+            </svg>
+          </a>
+          <!-- Simulated CV download trigger -->
+          <a href="#" class="cyber-btn outline" id="btn-download-resume">
+            <span>RESUME.PDF</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM17 13l-5 5-5-5h3V9h4v4h3z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Right anime avatar card -->
+      <div class="hero-avatar-frame" id="hero-tilt-chassis">
+        <div class="avatar-grid-wrapper" id="hero-card-element">
+          <div class="avatar-gradient-background"></div>
+          
+          <div class="avatar-hud-grid">
+            <div>GRID_COORDINATES: D3_SECTOR</div>
+            <div>SHIELD_NODE: ACTIVE</div>
+            <div>AI_COMPANION: YUKI</div>
+            <div class="hud-bar"><div class="hud-fill"></div></div>
+          </div>
+
+          <div class="avatar-character-artwork">
+            <div class="hero-avatar-image-frame">
+              <img class="hero-profile-avatar-img" src="https://pbs.twimg.com/profile_images/2034565949198864384/Dq4T2szw_400x400.jpg" alt="Gaurvit Tiwati">
+              <div class="hud-scanner-line"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==========================================
+       SECTION 2: ABOUT JOURNEY
+       ========================================== -->
+  <section class="cyber-section" id="about">
+    <h2 class="cyber-sec-title">NEURAL ROADMAP // MY JOURNEY</h2>
+    
+    <div class="about-grid">
+      
+      <!-- Text profiles -->
+      <div class="about-text-container">
+        <p>
+          I approach full-stack software development with a gaming mindset. Each database cluster is a structural node, 
+          each API route is a secure link in the network, and each visual component is a pixel optimized for the screen.
+        </p>
+        <p>
+          Starting from basic layout systems, I spent hundreds of hours writing Express backend servers, 
+          learning cryptography through bcrypt and JWT cookie authentication, and scaling collections in MongoDB. 
+        </p>
+        <p>
+          Currently, I specialized in architecting modular APIs and building dynamic single-page web environments 
+          that integrate live system feeds. Take a look at my timeline matrix to inspect my development evolution.
+        </p>
+      </div>
+
+      <!-- Timeline visual tracks -->
+      <div class="journey-timeline">
+        <div class="timeline-event-card">
+          <div class="timeline-node-pin"></div>
+          <div class="event-year">2024 - PRESENT</div>
+          <div class="event-title">Full-Stack Cyber Developer</div>
+          <div class="event-desc">Securing scalable backends using Node.js and Express. Scaling relational schemas in MongoDB. Crafting glassmorphism layouts.</div>
+        </div>
+        
+        <div class="timeline-event-card">
+          <div class="timeline-node-pin"></div>
+          <div class="event-year">2023 - 2024</div>
+          <div class="event-title">Backend Specialist</div>
+          <div class="event-desc">Built enterprise rate-limit engines, secured authentication endpoints, integrated REST APIs, and managed cloud deployments on Render.</div>
+        </div>
+
+        <div class="timeline-event-card">
+          <div class="timeline-node-pin"></div>
+          <div class="event-year">2022 - 2023</div>
+          <div class="event-title">Web Interface Architect</div>
+          <div class="event-desc">Mastered semantic layouts, pure CSS grids, and interactive JavaScript modules. Optimized workflows using CLI terminal controls.</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==========================================
+       SECTION 3: CORE SYSTEM SKILLS
+       ========================================== -->
+  <section class="cyber-section" id="skills">
+    <h2 class="cyber-sec-title">SPECIFIED CAPABILITIES // CORE SKILLS</h2>
+    
+    <div class="skills-deck-grid">
+      
+      <!-- 1. Frontend -->
+      <div class="skills-category-panel">
+        <h3 class="category-title">FRONTEND NETWORKS</h3>
+        <div class="skills-list">
+          <div class="skill-meter-row">
+            <div class="skill-row-meta"><span class="skill-name">HTML5 / EJS View Engine</span><span class="skill-pct">90%</span></div>
+            <div class="meter-track"><div class="meter-fill" data-percentage="90%"></div></div>
+          </div>
+          <div class="skill-meter-row">
+            <div class="skill-row-meta"><span class="skill-name">CSS3 / Glassmorphic Grid</span><span class="skill-pct">95%</span></div>
+            <div class="meter-track"><div class="meter-fill" data-percentage="95%"></div></div>
+          </div>
+          <div class="skill-meter-row">
+            <div class="skill-row-meta"><span class="skill-name">JavaScript (ES6+ Vanilla)</span><span class="skill-pct">95%</span></div>
+            <div class="meter-track"><div class="meter-fill" data-percentage="95%"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. Backend / DB -->
+      <div class="skills-category-panel">
+        <h3 class="category-title">BACKEND SYSTEM DATA</h3>
+        <div class="skills-list">
+          <div class="skill-meter-row">
+            <div class="skill-row-meta"><span class="skill-name">Node.js / Express Core</span><span class="skill-pct">95%</span></div>
+            <div class="meter-track"><div class="meter-fill" data-percentage="95%"></div></div>
+          </div>
+          <div class="skill-meter-row">
+            <div class="skill-row-meta"><span class="skill-name">MongoDB / Mongoose Collections</span><span class="skill-pct">90%</span></div>
+            <div class="meter-track"><div class="meter-fill" data-percentage="90%"></div></div>
+          </div>
+          <div class="skill-meter-row">
+            <div class="skill-row-meta"><span class="skill-name">JWT / bcrypt cryptographies</span><span class="skill-pct">95%</span></div>
+            <div class="meter-track"><div class="meter-fill" data-percentage="95%"></div></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==========================================
+       SECTION 4: PORTFOLIO CYBER PROJECTS
+       ========================================== -->
+  <section class="cyber-section" id="projects">
+    <h2 class="cyber-sec-title">DECOMPRESSED MODULES // PROJECTS</h2>
+    
+    <!-- Filtering panel chips -->
+    <div class="projects-filter-bar">
+      <button class="filter-btn active" data-filter="all">ALL DECK</button>
+      <button class="filter-btn" data-filter="Node.js">NODE.JS</button>
+      <button class="filter-btn" data-filter="Express.js">EXPRESS.JS</button>
+      <button class="filter-btn" data-filter="MongoDB">MONGODB</button>
+      <button class="filter-btn" data-filter="HTML5">HTML5 / CSS3</button>
+    </div>
+
+    <!-- Project lists -->
+    <div class="projects-masonry-grid" id="project-listings">
+      <% if (projects && projects.length > 0) { %>
+        <% projects.forEach(p => { %>
+          <div class="project-card" data-tags="<%= JSON.stringify(p.tags) %>">
+            <div class="project-card-image-holder">
+              <img src="<%= p.image %>" alt="<%= p.title %>" loading="lazy">
+              <div class="project-card-tags-overlay">
+                <% p.tags.slice(0, 3).forEach(tag => { %>
+                  <span class="tag-badge"><%= tag %></span>
+                <% }) %>
+              </div>
+            </div>
+            <div class="project-card-content">
+              <h3 class="project-card-title"><%= p.title %></h3>
+              <p class="project-card-desc"><%= p.description %></p>
+              
+              <div class="project-card-links">
+                <a href="<%= p.githubLink %>" target="_blank" class="project-link">
+                  <span>GITHUB NODE</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/>
+                  </svg>
+                </a>
+                
+                <% if (p.demoLink) { %>
+                  <a href="<%= p.demoLink %>" target="_blank" class="project-link">
+                    <span>LIVE LINK</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/>
+                    </svg>
+                  </a>
+                <% } %>
+              </div>
+            </div>
+          </div>
+        <% }) %>
+      <% } else { %>
+        <div>[TELEMETRY] No Projects recorded in Database registers.</div>
+      <% } %>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       SECTION 5: GAMIFIED SYSTEM ACHIEVEMENTS
+       ========================================== -->
+  <section class="cyber-section" id="achievements">
+    <h2 class="cyber-sec-title">ACHIEVEMENTS COMPLETED // BADGES</h2>
+    
+    <div class="achievements-grid">
+      <!-- 1. Custom Bootup -->
+      <div class="achievement-card-frame" id="badge-bootup-card">
+        <div class="badge-art">🔌</div>
+        <div class="achievement-details">
+          <div class="achievement-rarity rarity-common">Common</div>
+          <div class="achievement-title">System Bootup</div>
+          <div class="achievement-desc">Initiated Gaurvit's portfolio dashboard web grid.</div>
+        </div>
+      </div>
+
+      <!-- 2. Shell Hacker -->
+      <div class="achievement-card-frame locked" id="badge-shell-card">
+        <div class="badge-art">🐚</div>
+        <div class="achievement-details">
+          <div class="achievement-rarity rarity-common">Common</div>
+          <div class="achievement-title">Hacker Shell Access</div>
+          <div class="achievement-desc">Open the secure interactive command shell.</div>
+        </div>
+      </div>
+
+      <!-- 3. Themes shifts -->
+      <div class="achievement-card-frame locked" id="badge-theme-card">
+        <div class="badge-art">🎨</div>
+        <div class="achievement-details">
+          <div class="achievement-rarity rarity-common">Common</div>
+          <div class="achievement-title">Theme Shifter</div>
+          <div class="achievement-desc">Toggled database visual grid colors.</div>
+        </div>
+      </div>
+
+      <!-- 4. Matrix rain unlock -->
+      <div class="achievement-card-frame locked" id="badge-matrix-card">
+        <div class="badge-art">🌌</div>
+        <div class="achievement-details">
+          <div class="achievement-rarity rarity-epic">Epic</div>
+          <div class="achievement-title">Matrix Breaker</div>
+          <div class="achievement-desc">Activate and terminate cascading green codes.</div>
+        </div>
+      </div>
+
+      <!-- 5. Headpats companion -->
+      <div class="achievement-card-frame locked" id="badge-pat-card">
+        <div class="badge-art">🌸</div>
+        <div class="achievement-details">
+          <div class="achievement-rarity rarity-rare">Rare</div>
+          <div class="achievement-title">Companion Headpats</div>
+          <div class="achievement-desc">Click/pat Yuki the companion 5 times.</div>
+        </div>
+      </div>
+
+      <!-- 6. Voice nav -->
+      <div class="achievement-card-frame locked" id="badge-voice-card">
+        <div class="badge-art">🎙️</div>
+        <div class="achievement-details">
+          <div class="achievement-rarity rarity-rare">Rare</div>
+          <div class="achievement-title">Voice Captain</div>
+          <div class="achievement-desc">Command the deck modules using Speech AI.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       SECTION 6: CONTACT GRID PORTAL
+       ========================================== -->
+  <section class="cyber-section" id="contact">
+    <h2 class="cyber-sec-title">PING THE MAINFRAME // CONTACT</h2>
+    
+    <div class="contact-grid">
+      
+      <!-- Left side: system coords info -->
+      <div class="contact-hud-panel">
+        <div class="hud-item">
+          <div class="hud-label">COGNITIVE LOCATION:</div>
+          <div class="hud-value">Faridabad, India // GMT+5:30</div>
+        </div>
+        <div class="hud-item">
+          <div class="hud-label">NEURAL DIRECT NODE:</div>
+          <div class="hud-value">gaurvit.tiwati.dev@gmail.com</div>
+        </div>
+        <div class="hud-item">
+          <div class="hud-label">NETWORKS SECURE STAT:</div>
+          <div class="hud-value">MongoDB Storage Layer active. Transport rate limited.</div>
+        </div>
+      </div>
+
+      <!-- Right side: message forms portal -->
+      <div class="contact-form-portal">
+        <form class="contact-form" id="cyber-contact-form">
+          <div class="form-group-double">
+            <div class="form-field-unit">
+              <label for="name">IDENTITY CALLSIGN</label>
+              <input type="text" id="contact-name" class="form-input" placeholder="Callsign or Name" required>
+            </div>
+            <div class="form-field-unit">
+              <label for="email">TRANSPORT RETURNING MAIL</label>
+              <input type="email" id="contact-email" class="form-input" placeholder="netrunner@web.org" required>
+            </div>
+          </div>
+          
+          <div class="form-field-unit">
+            <label for="subject">COMMUNICATIONS HEADER</label>
+            <input type="text" id="contact-subject" class="form-input" placeholder="General Inquiry / Project proposal">
+          </div>
+
+          <div class="form-field-unit">
+            <label for="message">DATA PACKETS BODY</label>
+            <textarea id="contact-message" class="form-input" placeholder="Compose message payloads here..." required></textarea>
+          </div>
+
+          <button type="submit" class="cyber-btn" id="btn-submit-contact">
+            <span>DISPATCH DATA PACKET</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+            </svg>
+          </button>
+        </form>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 7. Footer systems state panel -->
+  <%- include('partials/footer') %>
+
+  <!-- Canvas particles overlays backdrops -->
+  <script src="/js/main.js"></script>
+  <script src="/js/chatbot.js"></script>
+  <script src="/js/terminal.js"></script>
+  
+  <script>
+    // ------------------------------------------
+    // HERO PARALLAX TILT AND TYPING SCRIPT
+    // ------------------------------------------
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. Hero visual typing effects
+      const target = document.getElementById('hero-typing-target');
+      const terms = [
+        "Backend Developer.",
+        "Express.js & Node.js Developer.",
+        "MongoDB Data Architect.",
+        "Secure APIs Engineer."
+      ];
+      let tIdx = 0;
+      let charIdx = 0;
+      let isDeleting = false;
+      
+      function typeLoop() {
+        const word = terms[tIdx];
+        if (isDeleting) {
+          target.innerText = word.substring(0, charIdx - 1);
+          charIdx--;
+        } else {
+          target.innerText = word.substring(0, charIdx + 1);
+          charIdx++;
+        }
+        
+        let typeSpeed = isDeleting ? 40 : 80;
+        
+        if (!isDeleting && charIdx === word.length) {
+          typeSpeed = 1500; // Pause at end of word
+          isDeleting = true;
+        } else if (isDeleting && charIdx === 0) {
+          isDeleting = false;
+          tIdx = (tIdx + 1) % terms.length;
+          typeSpeed = 400; // Brief pause before typing next
+        }
+        
+        setTimeout(typeLoop, typeSpeed);
+      }
+      if (target) typeLoop();
+
+      // 2. Resume download trigger simulated achievement
+      const resumeBtn = document.getElementById('btn-download-resume');
+      if (resumeBtn) {
+        resumeBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          alert('Downloading Gaurvit Tiwati\'s technical resume.pdf... Data link synced!');
+          
+          if (window.unlockAchievement) {
+            window.unlockAchievement('Credentials Downloaded', 'Downloaded Gaurvit\'s technical resume dossier.', 'badge_resume', 'Common');
+          }
+        });
+      }
+
+      // 3. Contact Form Submission
+      const contactForm = document.getElementById('cyber-contact-form');
+      if (contactForm) {
+        contactForm.addEventListener('submit', async (e) => {
+          e.preventDefault();
+          const btn = document.getElementById('btn-submit-contact');
+          btn.disabled = true;
+          btn.innerText = 'DISPATCHING PAYLOAD...';
+          
+          const payload = {
+            name: document.getElementById('contact-name').value,
+            email: document.getElementById('contact-email').value,
+            subject: document.getElementById('contact-subject').value,
+            message: document.getElementById('contact-message').value
+          };
+          
+          try {
+            const res = await fetch('/api/contacts', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(payload)
+            });
+            const data = await res.json();
+            
+            if (data.success) {
+              alert(data.message);
+              contactForm.reset();
+              
+              // Unlock legendary contact achievement!
+              if (window.unlockAchievement) {
+                window.unlockAchievement('Pinged Mainframe', 'Successfully sent contact data payload to Gaurvit Tiwati.', 'badge_contact_ping', 'Rare');
+              }
+            } else {
+              alert('Grid alert: transport failed.');
+            }
+          } catch (err) {
+            alert('Core alert: database link offline.');
+          } finally {
+            btn.disabled = false;
+            btn.innerText = 'DISPATCH DATA PACKET';
+          }
+        });
+      }
+
+      // 4. Projects filter logic
+      const filterBtns = document.querySelectorAll('.filter-btn');
+      const cards = document.querySelectorAll('.project-card');
+      
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          filterBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          
+          const filter = btn.getAttribute('data-filter');
+          
+          cards.forEach(card => {
+            const tags = JSON.parse(card.getAttribute('data-tags') || '[]');
+            if (filter === 'all' || tags.includes(filter)) {
+              card.style.display = 'flex';
+            } else {
+              card.style.display = 'none';
+            }
+          });
+        });
+      });
+
+      // 5. Unlocks client visual states for unlocked achievements
+      async function updateClientBadges() {
+        try {
+          const response = await fetch('/api/achievements');
+          const res = await response.json();
+          if (res.success && res.data.length > 0) {
+            res.data.forEach(ach => {
+              const el = document.getElementById(`${ach.badgeId}-card`);
+              if (el) {
+                el.classList.remove('locked');
+              }
+            });
+          }
+        } catch (e) {}
+      }
+      setInterval(updateClientBadges, 2000); // Check unlocks periodically
+    });
+  </script>
+
+  <!-- 3D Card tilt dynamic effects on Hero Image card -->
+  <script>
+    const chassis = document.getElementById('hero-tilt-chassis');
+    const card = document.getElementById('hero-card-element');
+    
+    if (chassis && card) {
+      chassis.addEventListener('mousemove', (e) => {
+        const rect = chassis.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width/2;
+        const y = e.clientY - rect.top - rect.height/2;
+        
+        // Tilt calculations
+        const tiltX = (y / rect.height) * -20;
+        const tiltY = (x / rect.width) * 20;
+        
+        card.style.transform = `rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale(1.03)`;
+      });
+      
+      chassis.addEventListener('mouseleave', () => {
+        card.style.transform = 'rotateX(0deg) rotateY(0deg) scale(1)';
+      });
+    }
+  </script>
+
+</body>
+</html>

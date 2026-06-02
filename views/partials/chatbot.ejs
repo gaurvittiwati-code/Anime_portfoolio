@@ -1,0 +1,56 @@
+<div class="cyber-chatbot-window" id="chatbot-mainframe">
+  <!-- Chatbot Header -->
+  <div class="chatbot-header">
+    <div class="header-identity">
+      <span class="active-node-dot"></span>
+      <span class="companion-bot-name">YUKI // INTEL MODULE</span>
+    </div>
+    <div class="header-controls">
+      <button class="control-btn" id="chatbot-minimize-btn" title="Minimize Panel">_</button>
+      <button class="control-btn close" id="chatbot-close-btn" title="Close Panel">×</button>
+    </div>
+  </div>
+
+  <!-- Chatbot Dialog feeds -->
+  <div class="chatbot-dialog-area" id="chatbot-messages">
+    <!-- Welcome greeting -->
+    <div class="chat-bubble bot">
+      <div class="chat-sender">Yuki</div>
+      <div class="chat-message-text">Konnichiwa! I am Yuki, Gaurvit's digital companion. I can retrieve coding records, timeline events, or explain database operations. Ask me anything or select a prompt query block below!</div>
+      <div class="chat-timestamp" id="initial-timestamp">12:00:00</div>
+    </div>
+  </div>
+
+  <!-- Typing indicator simulated -->
+  <div class="chatbot-typing-pulse" id="chatbot-typing-indicator">
+    <span></span><span></span><span></span>
+  </div>
+
+  <!-- Quick response grids -->
+  <div class="chatbot-suggestions">
+    <button class="suggest-chip" data-query="Who is Gaurvit Tiwati?">About Gaurvit</button>
+    <button class="suggest-chip" data-query="What are his core development skills?">Tech Stack</button>
+    <button class="suggest-chip" data-query="Tell me about his top projects.">Projects Profile</button>
+    <button class="suggest-chip" data-query="How can I contact or hire him?">Contact Mainframe</button>
+  </div>
+
+  <!-- Message inputs -->
+  <form class="chatbot-input-deck" id="chatbot-form">
+    <input type="text" class="chatbot-input-field" id="chatbot-input" placeholder="Query Yuki's database logs..." required autocomplete="off">
+    <button type="submit" class="chatbot-send-btn" title="Send Request">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+        <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+      </svg>
+    </button>
+  </form>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const timestamp = document.getElementById('initial-timestamp');
+    if (timestamp) {
+      const now = new Date();
+      timestamp.innerText = now.toTimeString().split(' ')[0];
+    }
+  });
+</script>

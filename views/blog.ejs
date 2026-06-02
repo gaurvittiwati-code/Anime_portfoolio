@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="cyberpunk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    .blog-landing-banner {
+      text-align: center;
+      padding: 6rem 2rem 3rem 2rem;
+      max-width: 800px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .search-chassis {
+      display: flex;
+      justify-content: center;
+      margin-top: 1rem;
+    }
+    .search-input-field {
+      width: 100%;
+      max-width: 450px;
+      background: var(--bg-secondary);
+      border: 1.5px solid var(--glass-border);
+      border-radius: 30px;
+      padding: 0.7rem 1.5rem;
+      color: var(--text-main);
+      font-size: 0.9rem;
+    }
+    .search-input-field:focus {
+      border-color: var(--color-neon-pink);
+      box-shadow: var(--accent-glow);
+    }
+    .blog-logs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 2.5rem;
+      max-width: 1200px;
+      margin: 0 auto 6rem auto;
+      padding: 0 2rem;
+    }
+    .blog-card {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--panel-radius);
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+      transition: all 0.3s;
+    }
+    .blog-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--color-neon-cyan);
+      box-shadow: var(--cyan-glow);
+    }
+    .blog-card-meta {
+      display: flex;
+      justify-content: space-between;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--color-neon-cyan);
+    }
+    .blog-card-title {
+      font-family: var(--font-cyber);
+      font-size: 1.3rem;
+      color: var(--text-main);
+    }
+    .blog-card-excerpt {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      flex-grow: 1;
+    }
+    .blog-card-foot {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: auto;
+    }
+    .read-log-btn {
+      font-family: var(--font-cyber);
+      font-weight: 700;
+      font-size: 0.8rem;
+      color: var(--color-neon-pink);
+    }
+    .read-log-btn:hover {
+      text-shadow: var(--accent-glow);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Scanlines visual filters -->
+  <div class="scanline-overlay"></div>
+
+  <!-- Main header controls -->
+  <%- include('partials/header') %>
+
+  <!-- Banner details -->
+  <header class="blog-landing-banner">
+    <h1 class="cyber-sec-title" style="margin-bottom:0.5rem;">NEURAL LOGS // BLOG</h1>
+    <p style="color: var(--text-muted); line-height: 1.6;">
+      Decompressing full-stack software procedures, grid CSS custom visual layouts, 
+      and node backend structures. Search the logs database.
+    </p>
+    
+    <div class="search-chassis">
+      <input type="text" id="log-search-field" class="search-input-field" placeholder="Search neural archives by title or tag...">
+    </div>
+  </header>
+
+  <!-- Logs catalog grid -->
+  <main class="blog-logs-grid" id="blog-listings-container">
+    <% if (blogs && blogs.length > 0) { %>
+      <% blogs.forEach(b => { %>
+        <article class="blog-card" data-tags="<%= JSON.stringify(b.tags) %>">
+          <div class="blog-card-meta">
+            <span><%= new Date(b.createdAt).toLocaleDateString() %></span>
+            <span><%= b.comments.length %> COMMENTS</span>
+          </div>
+          
+          <h2 class="blog-card-title"><%= b.title %></h2>
+          <p class="blog-card-excerpt"><%= b.excerpt %></p>
+          
+          <div class="blog-card-foot">
+            <div style="display:flex; gap:6px;">
+              <% b.tags.forEach(t => { %>
+                <span class="table-tag" style="margin-right:0;"><%= t %></span>
+              <% }) %>
+            </div>
+            
+            <a href="/blog/<%= b.slug %>" class="read-log-btn">READ_LOG ></a>
+          </div>
+        </article>
+      <% }) %>
+    <% } else { %>
+      <div>[GRID] No Neural logs recorded inside database systems.</div>
+    <% } %>
+  </main>
+
+  <!-- Telemetry states footer -->
+  <%- include('partials/footer') %>
+
+  <script src="/js/main.js"></script>
+  <script>
+    // Search tags/titles filtration logic
+    document.addEventListener('DOMContentLoaded', () => {
+      const search = document.getElementById('log-search-field');
+      const cards = document.querySelectorAll('.blog-card');
+      
+      if (search) {
+        search.addEventListener('input', () => {
+          const val = search.value.toLowerCase().trim();
+          
+          cards.forEach(card => {
+            const title = card.querySelector('.blog-card-title').innerText.toLowerCase();
+            const tags = JSON.parse(card.getAttribute('data-tags') || '[]').map(t => t.toLowerCase());
+            
+            const isMatch = title.includes(val) || tags.some(t => t.includes(val));
+            if (isMatch) {
+              card.style.display = 'flex';
+            } else {
+              card.style.display = 'none';
+            }
+          });
+        });
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="cyberpunk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    .post-chamber {
+      max-width: 800px;
+      margin: 8rem auto 6rem auto;
+      padding: 0 2rem;
+    }
+    .post-metadata {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--color-neon-cyan);
+      display: flex;
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .post-title {
+      font-family: var(--font-cyber);
+      font-size: 2.5rem;
+      font-weight: 900;
+      line-height: 1.2;
+      color: var(--text-main);
+      margin-bottom: 2rem;
+    }
+    /* Compiled Markdown Typography */
+    .post-compiled-body {
+      line-height: 1.8;
+      font-size: 1.05rem;
+      color: var(--text-main);
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      border-bottom: 1.5px solid var(--glass-border);
+      padding-bottom: 3rem;
+      margin-bottom: 3rem;
+    }
+    .post-compiled-body h2 {
+      font-family: var(--font-cyber);
+      font-size: 1.6rem;
+      color: var(--color-neon-pink);
+      margin-top: 1.5rem;
+      text-shadow: var(--accent-glow);
+    }
+    .post-compiled-body h3 {
+      font-family: var(--font-cyber);
+      font-size: 1.25rem;
+      color: var(--color-neon-cyan);
+      margin-top: 1rem;
+    }
+    .post-compiled-body p {
+      color: var(--text-muted);
+    }
+    .post-compiled-body ul, .post-compiled-body ol {
+      margin-left: 2rem;
+      color: var(--text-muted);
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .post-compiled-body pre {
+      background-color: var(--bg-secondary);
+      border: 1px solid var(--glass-border);
+      border-radius: 8px;
+      padding: 1.2rem;
+      overflow-x: auto;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: #39ff14;
+    }
+    .post-compiled-body code {
+      font-family: var(--font-mono);
+      background-color: var(--bg-accent);
+      padding: 0.2rem 0.4rem;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      color: var(--color-neon-pink);
+    }
+    .post-compiled-body pre code {
+      padding: 0;
+      background: none;
+      color: inherit;
+    }
+    /* Comments Sections */
+    .comments-dock {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+    .comments-title {
+      font-family: var(--font-cyber);
+      font-size: 1.4rem;
+      color: var(--text-main);
+    }
+    .comments-feed {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    .comment-bubble-row {
+      background-color: var(--bg-secondary);
+      border: 1px solid var(--glass-border);
+      border-radius: 8px;
+      padding: 1.2rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .comment-meta {
+      display: flex;
+      justify-content: space-between;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--color-neon-cyan);
+    }
+    .comment-author-name {
+      font-weight: 700;
+      color: var(--text-main);
+    }
+    .comment-body {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+    .comment-form-box {
+      background-color: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--panel-radius);
+      padding: 2rem;
+      margin-top: 1.5rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Scanlines visual filters -->
+  <div class="scanline-overlay"></div>
+
+  <!-- Header navbar -->
+  <%- include('partials/header') %>
+
+  <!-- Article Core container -->
+  <main class="post-chamber">
+    
+    <div class="post-metadata">
+      <span>LOGGED: <%= new Date(blog.createdAt).toLocaleDateString() %></span>
+      <span>SECTOR: <%= blog.tags.join(' // ') %></span>
+    </div>
+    
+    <h1 class="post-title"><%= blog.title %></h1>
+    
+    <!-- Render compiled markdown -->
+    <div class="post-compiled-body">
+      <%- compiledContent %>
+    </div>
+
+    <!-- Dynamic comments panel -->
+    <section class="comments-dock">
+      <h3 class="comments-title">TRANSMITTED FEEDBACKS (<span id="comment-metrics"><%= blog.comments.length %></span>)</h3>
+      
+      <!-- List inputs -->
+      <div class="comments-feed" id="comments-timeline-feed">
+        <% if (blog.comments && blog.comments.length > 0) { %>
+          <% blog.comments.forEach(c => { %>
+            <div class="comment-bubble-row">
+              <div class="comment-meta">
+                <span class="comment-author-name"><%= c.author %></span>
+                <span><%= new Date(c.createdAt).toLocaleDateString() %></span>
+              </div>
+              <p class="comment-body"><%= c.content %></p>
+            </div>
+          <% }) %>
+        <% } else { %>
+          <div id="no-comments-indicator" style="color: var(--text-muted); font-size: 0.9rem;">No data feed transmissions captured yet. Be the first to emit feedback!</div>
+        <% } %>
+      </div>
+
+      <!-- Add Comments Form -->
+      <div class="comment-form-box">
+        <h4 class="category-title" style="margin-bottom:1.5rem;">TRANSMIT COMMENT PAYLOAD</h4>
+        
+        <form class="contact-form" id="blog-comment-form">
+          <div class="form-group-double">
+            <div class="form-field-unit">
+              <label for="c-author">identity callsign</label>
+              <input type="text" id="c-author" class="form-input" placeholder="Callsign or Name" required>
+            </div>
+            <div class="form-field-unit">
+              <label for="c-email">returning email node</label>
+              <input type="email" id="c-email" class="form-input" placeholder="name@domain.com" required>
+            </div>
+          </div>
+
+          <div class="form-field-unit">
+            <label for="c-message">comment payload</label>
+            <textarea id="c-message" class="form-input" placeholder="Write feedback transmission packets here..." required style="min-height:90px;"></textarea>
+          </div>
+
+          <button type="submit" class="cyber-btn" id="btn-post-comment">
+            <span>TRANSMIT PACKET</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+            </svg>
+          </button>
+        </form>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- Telemetry states footer -->
+  <%- include('partials/footer') %>
+
+  <script src="/js/main.js"></script>
+  <script>
+    // AJAX comment creation logic
+    document.addEventListener('DOMContentLoaded', () => {
+      const form = document.getElementById('blog-comment-form');
+      if (form) {
+        form.addEventListener('submit', async (e) => {
+          e.preventDefault();
+          const btn = document.getElementById('btn-post-comment');
+          btn.disabled = true;
+          btn.innerText = 'TRANSMITTING...';
+          
+          const slug = '<%= blog.slug %>';
+          const payload = {
+            author: document.getElementById('c-author').value,
+            email: document.getElementById('c-email').value,
+            content: document.getElementById('c-message').value
+          };
+          
+          try {
+            const res = await fetch(`/api/blogs/\${slug}/comments`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(payload)
+            });
+            const data = await res.json();
+            
+            if (data.success) {
+              // Append comment card to UI instantly
+              const container = document.getElementById('comments-timeline-feed');
+              const indicator = document.getElementById('no-comments-indicator');
+              if (indicator) indicator.remove();
+              
+              const newCard = document.createElement('div');
+              newCard.className = 'comment-bubble-row';
+              newCard.innerHTML = `
+                <div class="comment-meta">
+                  <span class="comment-author-name">\${payload.author}</span>
+                  <span>\${new Date().toLocaleDateString()}</span>
+                </div>
+                <p class="comment-body">\${payload.content}</p>
+              `;
+              
+              container.appendChild(newCard);
+              form.reset();
+              
+              // Increment metrics counter
+              const counter = document.getElementById('comment-metrics');
+              counter.innerText = parseInt(counter.innerText) + 1;
+              
+              alert('Comment payload transmitted and securely compiled.');
+            } else {
+              alert('Error compiling comment.');
+            }
+          } catch (err) {
+            alert('Core connection failed.');
+          } finally {
+            btn.disabled = false;
+            btn.innerText = 'TRANSMIT PACKET';
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>

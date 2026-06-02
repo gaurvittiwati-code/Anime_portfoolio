@@ -1,0 +1,50 @@
+<div class="cyber-terminal-overlay" id="terminal-mainframe-overlay">
+  <div class="terminal-shell-window">
+    <!-- Window Bar -->
+    <div class="terminal-header-bar">
+      <div class="terminal-decorations">
+        <span class="dot red"></span>
+        <span class="dot yellow"></span>
+        <span class="dot green"></span>
+      </div>
+      <div class="terminal-window-title">SYSTEM_CORE@GAURVIT_MAINFRAME: ~</div>
+      <button class="terminal-close-x" id="terminal-close-btn" title="Exit Terminal (Press Esc)">×</button>
+    </div>
+
+    <!-- Retro terminal content area -->
+    <div class="terminal-body-content" id="terminal-body">
+      <div class="scanlines"></div>
+      
+      <!-- Welcome system header -->
+      <div class="terminal-system-banner">
+        <pre class="terminal-ascii-logo">
+ ██████╗  █████╗ ██╗   ██╗██████╗ ██╗   ██╗██╗████████╗
+██╔════╝ ██╔══██╗██║   ██║██╔══██╗██║   ██║██║╚══██╔══╝
+██║  ███╗███████║██║   ██║██████╔╝██║   ██║██║   ██║   
+██║   ██║██╔══██║██║   ██║██╔══██╗╚██╗ ██╔╝██║   ██║   
+╚██████╔╝██║  ██║╚██████╔╝██║  ██║ ╚████╔╝ ██║   ██║   
+ ╚═════╝ ╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═╝  ╚═══╝  ╚═╝   ╚═╝   
+        </pre>
+        <div>=========================================================</div>
+        <div>GAURVIT TIWATI -- DECRYPTED SECURE MAINFRAME SYSTEMS</div>
+        <div>OPERATIONAL BASE PORTAL v2.6.1 -- EMULATION SUCCESSFUL</div>
+        <div>type <span class="term-highlight">"help"</span> for a catalog of standard CLI procedures.</div>
+        <div>=========================================================</div>
+        <br>
+      </div>
+
+      <!-- Historical CLI elements injected dynamically -->
+      <div id="terminal-cli-history"></div>
+
+      <!-- Interactive console CLI input prompt -->
+      <div class="terminal-input-prompt-line">
+        <span class="prompt-user">cyber-guest@gaurvit.sys:~$</span>
+        <span class="prompt-text-wrapper">
+          <input type="text" class="terminal-hidden-input" id="terminal-keyboard-input" autocomplete="off" autofocus>
+          <span class="terminal-visible-prompt" id="terminal-prompt-echo"></span>
+          <span class="terminal-blinking-cursor"></span>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>

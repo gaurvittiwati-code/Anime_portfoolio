@@ -1,0 +1,70 @@
+<div id="cyber-loading" class="cyber-loader-container">
+  <div class="loader-content">
+    <div class="glitch-title" data-text="GAURVIT // SYSTEM BOOT">GAURVIT // SYSTEM BOOT</div>
+    <div class="loader-chassis">
+      <div class="loader-fill" id="loader-progress"></div>
+    </div>
+    <div class="loader-status">
+      <span class="pulse-dot"></span>
+      <span id="loader-status-text">INITIALIZING QUANTUM CYBER-GRID...</span>
+    </div>
+    <div class="loader-terminal-output" id="loader-terminal">
+      <div>[OK] LINK STACK: JavaScript / Node.js / Express</div>
+      <div>[OK] DATABASE SUBSYSTEM: Sandbox MongoDB Mode initialized</div>
+      <div>[OK] NEURAL INTELLIGENCE: Yuki v3.5 active</div>
+      <div>[OK] DESIGN SYSTEMS: Glassmorphic matrix grids loaded</div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const progress = document.getElementById('loader-progress');
+    const statusText = document.getElementById('loader-status-text');
+    const loader = document.getElementById('cyber-loading');
+    const logs = [
+      'DOWNLOADING CYBERPUNK PALETTES...',
+      'TUNING WEB AUDIO OSCILLATORS...',
+      'SYNAPSE INDEX: GAURVIT TIWATI BIO...',
+      'ESTABLISHING CYBER-LINK PORTAL...',
+      'ALL NETWORKS OPERATIONAL. ENJOY!'
+    ];
+    
+    let currentPct = 0;
+    let logIndex = 0;
+    
+    const interval = setInterval(() => {
+      currentPct += Math.floor(Math.random() * 8) + 4;
+      if (currentPct >= 100) {
+        currentPct = 100;
+        clearInterval(interval);
+        progress.style.width = '100%';
+        statusText.innerText = 'ONLINE';
+        
+        // Hide loader with a magnificent cyberpunk glitch and fadeout
+        setTimeout(() => {
+          loader.classList.add('loader-fadeout');
+          setTimeout(() => {
+            loader.style.display = 'none';
+            // Trigger bootup achievement!
+            if (window.unlockAchievement) {
+              window.unlockAchievement('System Bootup', 'Initiated Gaurvit\'s Cyber-Portfolio ecosystem.', 'badge_bootup', 'Common');
+            }
+          }, 800);
+        }, 500);
+      } else {
+        progress.style.width = currentPct + '%';
+        if (currentPct % 20 === 0 || Math.random() > 0.85) {
+          if (logIndex < logs.length) {
+            statusText.innerText = logs[logIndex];
+            const logLine = document.createElement('div');
+            logLine.innerText = `[SECURE] ${logs[logIndex]}`;
+            document.getElementById('loader-terminal').appendChild(logLine);
+            document.getElementById('loader-terminal').scrollTop = document.getElementById('loader-terminal').scrollHeight;
+            logIndex++;
+          }
+        }
+      }
+    }, 80);
+  });
+</script>

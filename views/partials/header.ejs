@@ -1,0 +1,75 @@
+<header class="cyber-header">
+  <div class="header-container">
+    <!-- Brand / Name logo -->
+    <a href="/" class="brand-logo">
+      <span class="glitch" data-text="GAURVIT.SYS">GAURVIT.SYS</span>
+      <span class="pulse-glow-indicator"></span>
+    </a>
+
+    <!-- Navigation Hub -->
+    <nav class="cyber-nav" id="cyber-nav-menu">
+      <ul class="nav-list">
+        <li><a href="/#home" class="nav-link active" data-section="home">HOME</a></li>
+        <li><a href="/#about" class="nav-link" data-section="about">ABOUT</a></li>
+        <li><a href="/#skills" class="nav-link" data-section="skills">SKILLS</a></li>
+        <li><a href="/#projects" class="nav-link" data-section="projects">PROJECTS</a></li>
+        <li><a href="/#achievements" class="nav-link" data-section="achievements">ACHIEVEMENTS</a></li>
+        <li><a href="/blog" class="nav-link <%= currentPage === 'blog' ? 'active' : '' %>">LOGS</a></li>
+        <li><a href="/#contact" class="nav-link" data-section="contact">CONTACT</a></li>
+        <li><a href="/admin" class="nav-link admin-glow <%= currentPage === 'admin' ? 'active' : '' %>">CONSOLE</a></li>
+      </ul>
+    </nav>
+
+    <!-- Interactive control decks -->
+    <div class="control-deck">
+      <!-- 1. Music cassette synth switch -->
+      <button class="deck-btn" id="synth-audio-btn" title="Toggle Synthesizer Music (Web Audio API)">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" class="btn-icon">
+          <path fill="currentColor" d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+        </svg>
+        <span class="deck-label">SYNTH</span>
+      </button>
+
+      <!-- 2. Voice command engine switch -->
+      <button class="deck-btn" id="voice-nav-btn" title="Toggle Voice Navigation (Web Speech API)">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" class="btn-icon">
+          <path fill="currentColor" d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm5.3-3c0 3-2.54 5.1-5.3 5.1S6.7 14 6.7 11H5c0 3.41 2.72 6.23 6 6.72V21h2v-3.28c3.28-.48 6-3.3 6-6.72h-1.7z"/>
+        </svg>
+        <span class="deck-label" id="voice-btn-label">VOICE</span>
+      </button>
+
+      <!-- 3. Terminal Emulator Toggle -->
+      <button class="deck-btn" id="terminal-trigger-btn" title="Open Command-Line Terminal CLI (Press ~)">
+        <span class="terminal-indicator">>_</span>
+        <span class="deck-label">SHELL</span>
+      </button>
+
+      <!-- 4. Multi-Theme Trigger Menu -->
+      <div class="theme-menu-container">
+        <button class="deck-btn" id="theme-menu-btn" title="Change Theme Palette">
+          <span class="color-palette-circle"></span>
+          <span class="deck-label">THEME</span>
+        </button>
+        <div class="theme-dropdown" id="theme-dropdown-menu">
+          <button class="theme-option active" data-theme="cyberpunk">CYBERPUNK NEON</button>
+          <button class="theme-option" data-theme="sakura">SAKURA BLOSSOM</button>
+          <button class="theme-option" data-theme="matrix">DEEP SPACE MATRIX</button>
+          <button class="theme-option" data-theme="steampunk">STEAMPUNK AMBER</button>
+        </div>
+      </div>
+
+      <!-- Mobile Hamburger icon -->
+      <button class="hamburger-menu" id="hamburger-toggle" aria-label="Toggle Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Voice recognition action alert popup overlay -->
+  <div class="voice-notification-bar" id="voice-notification">
+    <div class="voice-pulse-ring"></div>
+    <span id="voice-status-msg">Listening... Try saying "Go to Projects" or "System Theme"!</span>
+  </div>
+</header>

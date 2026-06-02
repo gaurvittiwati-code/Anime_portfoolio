@@ -1,0 +1,113 @@
+<div class="anime-companion-widget" id="anime-companion">
+  <div class="companion-avatar-container" id="companion-avatar-click">
+    <!-- Bubble tooltip speech -->
+    <div class="companion-speech-bubble" id="companion-speech">
+      Hi! Click me to initiate custom AI chatbot queries. Let's explore Gaurvit's terminal!
+    </div>
+    
+    <!-- Beautiful pure CSS anime character face & hair -->
+    <div class="companion-character-body">
+      <!-- Hair back -->
+      <div class="anime-hair-back"></div>
+      
+      <!-- Head container -->
+      <div class="anime-head">
+        <!-- Blush markers -->
+        <div class="anime-blush blush-left"></div>
+        <div class="anime-blush blush-right"></div>
+        
+        <!-- Animated eyes -->
+        <div class="anime-eyes">
+          <div class="anime-eye eye-left">
+            <div class="anime-pupil">
+              <div class="pupil-reflection"></div>
+            </div>
+          </div>
+          <div class="anime-eye eye-right">
+            <div class="anime-pupil">
+              <div class="pupil-reflection"></div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Mouth -->
+        <div class="anime-mouth" id="companion-mouth"></div>
+      </div>
+      
+      <!-- Hair front / bangs -->
+      <div class="anime-hair-front">
+        <div class="hair-bang strand-1"></div>
+        <div class="hair-bang strand-2"></div>
+        <div class="hair-bang strand-3"></div>
+      </div>
+
+      <!-- Cybernetic headphones -->
+      <div class="anime-headphones">
+        <div class="headphoneband"></div>
+        <div class="earpad earpad-left"></div>
+        <div class="earpad earpad-right"></div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="companion-glow-ring"></div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const companion = document.getElementById('anime-companion');
+    const speech = document.getElementById('companion-speech');
+    const mouth = document.getElementById('companion-mouth');
+    
+    const greetings = [
+      "Click me to open my chatbot core!",
+      "Did you know? Double pressing ~ opens the secure hacker shell!",
+      "Gaurvit Tiwati has completed legendary Express backends!",
+      "Psst, I love headpats! Click me repeatedly!",
+      "Need to jump around? Say 'VOICE Nav' commands out loud!",
+      "I'm keeping track of your achievements. Go find them all!"
+    ];
+
+    let clickCount = 0;
+
+    // Hover response
+    companion.addEventListener('mouseenter', () => {
+      mouth.classList.add('smile');
+      speech.classList.add('visible');
+      const randomGreeting = greetings[Math.floor(Math.random() * greetings.length)];
+      speech.innerText = randomGreeting;
+    });
+
+    companion.addEventListener('mouseleave', () => {
+      mouth.classList.remove('smile');
+      setTimeout(() => {
+        speech.classList.remove('visible');
+      }, 3000);
+    });
+
+    // Tap/Click response
+    companion.addEventListener('click', (e) => {
+      e.stopPropagation();
+      clickCount++;
+      mouth.classList.add('open-mouth');
+      setTimeout(() => mouth.classList.remove('open-mouth'), 500);
+
+      // Play cute synthesised blip sound
+      if (window.playSynthNote) {
+        window.playSynthNote(750, 'sine', 0.08);
+      }
+
+      // Open chatbot console automatically
+      if (window.toggleChatbot) {
+        window.toggleChatbot(true);
+      }
+
+      // Achievement unlock conditions: "Headpat Master" (5 clicks)
+      if (clickCount >= 5) {
+        if (window.unlockAchievement) {
+          window.unlockAchievement('Companion Headpats', 'You gave Yuki the companion 5 headpats in a row!', 'badge_headpats', 'Rare');
+        }
+      }
+    });
+  });
+</script>

@@ -1,0 +1,70 @@
+<footer class="cyber-footer">
+  <div class="footer-container">
+    <div class="footer-block credentials">
+      <div class="footer-brand">GAURVIT TIWATI</div>
+      <p class="footer-tagline">Architecting secure Express.js microservices and building interactive frontend neural networks.</p>
+      <div class="social-networks-nodes">
+        <!-- GitHub node -->
+        <a href="https://github.com/gaurvit-tiwati" target="_blank" class="social-node-link" title="Github Portal">
+          <span>GITHUB</span>
+        </a>
+        <!-- LinkedIn node -->
+        <a href="https://linkedin.com/in/gaurvit-tiwati" target="_blank" class="social-node-link" title="LinkedIn Connection">
+          <span>LINKEDIN</span>
+        </a>
+        <!-- Peerlist integration handle -->
+        <a href="https://peerlist.io/gaurvit" target="_blank" class="social-node-link peerlist-accent" title="Peerlist Developer Grid">
+          <span>PEERLIST</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Live systems status panels -->
+    <div class="footer-block telemetry-panel">
+      <div class="telemetry-title">SYSTEM TELEMETRY</div>
+      <div class="telemetry-row">
+        <span class="telemetry-label">DATABASE CORE:</span>
+        <span class="telemetry-value <%= isOffline ? 'offline' : 'online' %>" id="footer-db-status">
+          <%= isOffline ? 'SANDBOX SECURE (LOCAL)' : 'HYPERLINK ACTIVE (ATLAS)' %>
+        </span>
+      </div>
+      <div class="telemetry-row">
+        <span class="telemetry-label">COGNITIVE COMPANION:</span>
+        <span class="telemetry-value online">YUKI v3.5 ONLINE</span>
+      </div>
+      <div class="telemetry-row">
+        <span class="telemetry-label">GRID POWER NODE:</span>
+        <span class="telemetry-value green-pulse">100% OPERATIONAL</span>
+      </div>
+    </div>
+
+    <!-- Interactive stats / system time clock -->
+    <div class="footer-block system-clock-block">
+      <div class="clock-display" id="footer-live-clock">12:00:00 AM</div>
+      <div class="clock-coordinates">LATENCY: <span id="system-latency-echo">12ms</span> // ZONE: GMT+5:30</div>
+      <div class="copyright-grid">© 2026 GAURVIT TIWATI. ALL RIGHTS RESERVED.</div>
+    </div>
+  </div>
+  
+  <div class="footer-scanline-strip"></div>
+</footer>
+
+<script>
+  // Dynamic clock controller script
+  document.addEventListener('DOMContentLoaded', () => {
+    const clock = document.getElementById('footer-live-clock');
+    const latencyVal = document.getElementById('system-latency-echo');
+    
+    // Clock updates
+    setInterval(() => {
+      const now = new Date();
+      clock.innerText = now.toLocaleTimeString();
+    }, 1000);
+
+    // Dynamic latency flutter
+    setInterval(() => {
+      const flutter = Math.floor(Math.random() * 8) + 8;
+      latencyVal.innerText = `${flutter}ms`;
+    }, 3000);
+  });
+</script>
